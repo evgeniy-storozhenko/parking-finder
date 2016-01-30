@@ -7,10 +7,14 @@
 ```
 {
   id: 1,
-  name: "Пересечение Красного проспекта и улицы Ленина",
+  name: "The Crossroads on st.Lenin",
   source: "http://webcam.211.ru/camera54_6/index.m3u8",
   lastUpdate: 1454166655831,
   lastImage: "/1/1454153246.jpg",
+  coordinate: {
+    x: 74.3,
+    y: 36.2
+  },
   places: [
     {
       id: 10,

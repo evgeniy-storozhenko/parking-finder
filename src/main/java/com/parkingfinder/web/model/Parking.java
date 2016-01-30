@@ -1,5 +1,7 @@
 package com.parkingfinder.web.model;
 
+import org.springframework.data.geo.Point;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,8 @@ public class Parking {
     private Date lastUpdate;
 
     private String lastImage;
+
+    private Point coordinate;
 
     private List<ParkingPlace> places;
 
@@ -63,5 +67,13 @@ public class Parking {
 
     public void setLastImage(String lastImage) {
         this.lastImage = lastImage;
+    }
+
+    public Point getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Point coordinate) {
+        this.coordinate = coordinate;
     }
 }

@@ -20,8 +20,9 @@ public class ParkingServiceImpl implements ParkingService {
 
         Parking parking = new Parking();
         parking.setId(1L);
+        parking.setCoordinate(new Point(74.3, 36.2));
         parking.setLastImage("/1/1454153246.jpg");
-        parking.setName("Пересечение Красного проспекта и улицы Ленина");
+        parking.setName("The Crossroads on st.Lenin");
         parking.setSource("http://webcam.211.ru/camera54_6/index.m3u8");
         parking.setLastUpdate(new Date());
 
