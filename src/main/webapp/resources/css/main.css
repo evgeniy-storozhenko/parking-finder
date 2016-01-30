@@ -1,0 +1,99 @@
+* {
+    /* Universal reset: */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table td {
+    vertical-align: top;
+}
+
+span:focus{
+    outline: 0;
+}
+
+header, footer, article, section, nav, figure {
+    /* Giving a display value to the HTML5 rendered elements: */
+    display: block;
+}
+
+body {
+    background: #ececec;
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode',
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #535353;
+}
+
+/* Hyperlink Styles: */
+a, a:visited {
+    color: #2E2E2E;
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a img {
+    border: none;
+}
+
+/* Headings: */
+h1, h2, h3 {
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode',
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /*text-shadow: 2px 2px 2px black;    */
+}
+
+h1 {
+    font-size: 32px;
+    border: 0px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h2 {
+    color: #fff;
+}
+
+p {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.displayNone {
+    display: none;
+}
+
+.displayBlock {
+    display: block;
+}
+
+.displayInlineBlock {
+    display: inline-block;
+}
