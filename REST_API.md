@@ -20,6 +20,7 @@
       id: 10,
       empty: true,
       rectangle: {
+        id: 1,
         minLeft: {
           x: 10,
           y: 10
@@ -42,6 +43,7 @@
       id: 11,
       empty: true,
       rectangle: {
+        id: 2,
         minLeft: {
           x: 110,
           y: 10

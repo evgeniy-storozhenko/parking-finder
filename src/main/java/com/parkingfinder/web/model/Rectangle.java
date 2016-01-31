@@ -1,15 +1,30 @@
 package com.parkingfinder.web.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.springframework.data.geo.Point;
 
+@Entity
 public class Rectangle {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "RECTANGLE_ID")
+    private Long id;
+
     private Point minLeft;
+
     private Point minRight;
+
     private Point maxLeft;
+
     private Point maxRight;
 
-    public Rectangle(Point minLeft, Point minRight, Point maxLeft, Point maxRight) {
+    public Rectangle(Long id,Point minLeft, Point minRight, Point maxLeft, Point maxRight) {
+        this.id = id;
         this.minLeft = minLeft;
         this.minRight = minRight;
         this.maxLeft = maxLeft;
@@ -49,5 +64,13 @@ public class Rectangle {
 
     public void setMaxRight(Point maxRight) {
         this.maxRight = maxRight;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

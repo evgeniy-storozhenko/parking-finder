@@ -1,12 +1,24 @@
 package com.parkingfinder.web.model;
 
-import org.springframework.data.geo.Point;
-
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.springframework.data.geo.Point;
+
+@Entity
 public class Parking {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "PARKING_ID")
     private Long id;
 
     private String name;
@@ -19,6 +31,7 @@ public class Parking {
 
     private Point coordinate;
 
+    @OneToMany
     private List<ParkingPlace> places;
 
     public Long getId() {

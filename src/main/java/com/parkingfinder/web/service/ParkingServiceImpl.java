@@ -31,13 +31,13 @@ public class ParkingServiceImpl implements ParkingService {
         ParkingPlace parkingPlace1 = new ParkingPlace();
         parkingPlace1.setId(10);
         parkingPlace1.setEmpty(true);
-        parkingPlace1.setRectangle(new Rectangle(new Point(10, 10), new Point(13, 40),
+        parkingPlace1.setRectangle(new Rectangle(1L, new Point(10, 10), new Point(13, 40),
                 new Point(30, 30), new Point(40, 60)));
 
         ParkingPlace parkingPlace2 = new ParkingPlace();
         parkingPlace2.setId(11);
         parkingPlace2.setEmpty(true);
-        parkingPlace2.setRectangle(new Rectangle(new Point(110, 10), new Point(113, 40),
+        parkingPlace2.setRectangle(new Rectangle(1L, new Point(110, 10), new Point(113, 40),
                 new Point(130, 30), new Point(140, 60)));
 
         places.add(parkingPlace1);

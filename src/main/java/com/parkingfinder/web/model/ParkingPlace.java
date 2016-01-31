@@ -1,11 +1,22 @@
 package com.parkingfinder.web.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class ParkingPlace {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "PARKING_PLACE_ID")
     private long id;
 
     private boolean empty;
 
+    @OneToOne
     private Rectangle rectangle;
 
     public long getId() {
