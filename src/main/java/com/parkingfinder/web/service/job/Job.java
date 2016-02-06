@@ -2,6 +2,8 @@ package com.parkingfinder.web.service.job;
 
 import java.io.File;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.parkingfinder.analyzer.capture.CaptureService;
 import com.parkingfinder.analyzer.capture.CaptureServiceFactory;
@@ -9,6 +11,8 @@ import com.parkingfinder.web.model.Parking;
 import com.parkingfinder.web.model.Status;
 
 public class Job extends Thread {
+
+    private static final Logger logger = Logger.getLogger("JobManager");
 
     private Date started;
 
@@ -37,6 +41,7 @@ public class Job extends Thread {
             }
             this.status = Status.SUCCESS;
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
             this.status = Status.ERROR;
         }
     }
