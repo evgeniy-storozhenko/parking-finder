@@ -1,5 +1,7 @@
 package com.parkingfinder.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,12 @@ public class ParkingFinder {
     public @ResponseBody Parking getParking(@PathVariable Long id)
             throws Exception {
         return parkingService.getParking(id);
+    }
+
+    @RequestMapping(path = "/parking", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<Parking> getAllParking() throws Exception {
+        return parkingService.getAllParking();
     }
 
 }

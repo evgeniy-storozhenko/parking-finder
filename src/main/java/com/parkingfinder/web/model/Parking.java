@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -41,7 +42,7 @@ public class Parking {
     @NotFound(action = NotFoundAction.IGNORE)
     private City city;
 
-    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<ParkingPlace> places = new ArrayList<>();
 
     public Long getId() {

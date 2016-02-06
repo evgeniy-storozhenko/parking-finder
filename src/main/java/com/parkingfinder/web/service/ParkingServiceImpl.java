@@ -26,7 +26,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     @Transactional
     public List<Parking> getAllParking() {
-        return null;
+        return parkingRepository.getAllParking();
     }
 
     @Override
