@@ -25,7 +25,7 @@ public class JobManager extends Thread {
     public void run() {
         while (true) {
             try {
-                createJob();
+                createJobs();
                 Thread.sleep(JOB_DELAY);
             } catch (InterruptedException e) {
                 logger.log(Level.SEVERE, e.getMessage(), e);
@@ -33,10 +33,10 @@ public class JobManager extends Thread {
         }
     }
 
-    public void createJob() {
+    public void createJobs() {
         List<Parking> parking = parkingService.getAllParking();
         logger.info(String.format("Create jobs for each of %d parking", parking.size()));
-        parking.parallelStream().forEach((item) -> new Job(item).start());
+        parking.parallelStream().forEach((item) -> new Job(item, parkingService).start());
     }
 
 }
