@@ -12,6 +12,9 @@ import com.parkingfinder.web.model.Parking;
 public interface ParkingRepository extends JpaRepository<Parking, Long> {
 
     @Query("SELECT p FROM Parking p")
-    List<Parking> loadAllGaolReports();
+    List<Parking> getAllParking();
+
+    @Query("SELECT p FROM Parking p WHERE p.id = ?1")
+    Parking getParking(Long id);
 
 }

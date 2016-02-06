@@ -1,11 +1,14 @@
 package com.parkingfinder.web.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-import org.springframework.data.geo.Point;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class Rectangle {
@@ -15,12 +18,20 @@ public class Rectangle {
     @Column(name = "RECTANGLE_ID")
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Point minLeft;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Point minRight;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Point maxLeft;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Point maxRight;
 
     public Rectangle(Long id,Point minLeft, Point minRight, Point maxLeft, Point maxRight) {

@@ -1,17 +1,19 @@
 package com.parkingfinder.web.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import org.springframework.data.geo.Point;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class Parking {
@@ -23,16 +25,24 @@ public class Parking {
 
     private String name;
 
-    private String source;
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Source source;
 
     private Date lastUpdate;
 
     private String lastImage;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Point coordinate;
 
-    @OneToMany
-    private List<ParkingPlace> places;
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private City city;
+
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ParkingPlace> places = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -58,14 +68,6 @@ public class Parking {
         this.name = name;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
     public Date getLastUpdate() {
         return lastUpdate;
     }
@@ -88,5 +90,21 @@ public class Parking {
 
     public void setCoordinate(Point coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }

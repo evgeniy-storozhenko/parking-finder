@@ -1,10 +1,14 @@
 package com.parkingfinder.web.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class ParkingPlace {
@@ -12,18 +16,19 @@ public class ParkingPlace {
     @Id
     @GeneratedValue
     @Column(name = "PARKING_PLACE_ID")
-    private long id;
+    private Long id;
 
     private boolean empty;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Rectangle rectangle;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
