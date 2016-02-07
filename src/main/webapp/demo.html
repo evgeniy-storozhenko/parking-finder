@@ -89,7 +89,7 @@
         populateSmallSize: function(parking) {
             var canvas = $("#smallSizeCanvas")[0];
             var context = canvas.getContext('2d');
-            context.clear();
+//            context.clear();
             parking.places.forEach(function(place) {
                 var color = (place.empty) ? "#1b800f" : "#94030a";
                 var points = this.getPoints(place);
@@ -101,7 +101,7 @@
         populateFullSize: function(parking) {
             var canvas = $("#fullSizeCanvas")[0];
             var context = canvas.getContext('2d');
-            context.clear();
+//            context.clear();
             parking.places.forEach(function(place) {
                 var color = (place.empty) ? "#1b800f" : "#94030a";
                 var points = this.getPoints(place);
