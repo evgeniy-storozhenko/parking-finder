@@ -47,6 +47,7 @@ public class Job extends Thread {
             if (image != null) {
                 parking.setLastImage("/resources/images/records/" + image.getName());
                 Analyzer.getInstance().analyze(parking);
+                parking.setLastUpdate(new Date());
                 parkingService.save(parking);
             }
             this.status = Status.SUCCESS;
