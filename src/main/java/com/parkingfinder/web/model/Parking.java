@@ -43,7 +43,7 @@ public class Parking {
     private City city;
 
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private List<ParkingPlace> places = new ArrayList<>();
+    private List<ParkingArea> areas = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -51,14 +51,6 @@ public class Parking {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<ParkingPlace> getPlaces() {
-        return places;
-    }
-
-    public void setPlaces(List<ParkingPlace> places) {
-        this.places = places;
     }
 
     public String getName() {
@@ -107,5 +99,13 @@ public class Parking {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public List<ParkingArea> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<ParkingArea> areas) {
+        this.areas = areas;
     }
 }

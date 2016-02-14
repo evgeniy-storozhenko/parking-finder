@@ -53,8 +53,12 @@
 
 <script>
     var id = 1;
+    var smallSizeCanvas = $("#smallSizeCanvas")[0];
+    var fullSizeCanvas = $("#fullSizeCanvas")[0];
 
     var demoApp = {
+
+        isScaleSet: false,
 
         getParkingURL: "rs/parkingService/parking",
 
@@ -76,58 +80,48 @@
 
         populateShortInfo: function(parking) {
             var freePlacesNum = 0;
-            parking.places.forEach(function(place) {
-                if (place.empty) {
-                    freePlacesNum++;
-                }
+            var allPlacesNum = 0;
+            parking.areas.forEach(function(area) {
+                freePlacesNum += area.freeSpacesNum;
+                allPlacesNum += area.size;
             });
             $("#shortInfo").text("The parking \"" + parking.name + "\" has "
-                    + freePlacesNum + "/" + parking.places.length + " free parking spaces ["
+                    + freePlacesNum + "/" + allPlacesNum + " free parking spaces ["
                     + (new Date(parking.lastUpdate)) + "]");
         },
 
         populateSmallSize: function(parking) {
-            var canvas = $("#smallSizeCanvas")[0];
-            var context = canvas.getContext('2d');
-//            context.clear();
-            parking.places.forEach(function(place) {
-                var color = (place.empty) ? "#1b800f" : "#94030a";
-                var points = this.getPoints(place);
-                this.createPolyline(context, color, points);
-            }, this);
+            var context = smallSizeCanvas.getContext('2d');
+            context.clearRect(0, 0, smallSizeCanvas.width, smallSizeCanvas.height);
             this.drawImage(context, parking, 0.25);
         },
 
         populateFullSize: function(parking) {
-            var canvas = $("#fullSizeCanvas")[0];
-            var context = canvas.getContext('2d');
-//            context.clear();
-            parking.places.forEach(function(place) {
-                var color = (place.empty) ? "#1b800f" : "#94030a";
-                var points = this.getPoints(place);
-                this.createPolyline(context, color, points);
-            }, this);
+            var context = fullSizeCanvas.getContext('2d');
+            context.clearRect(0, 0, fullSizeCanvas.width, fullSizeCanvas.height);
             this.drawImage(context, parking, 1);
         },
 
+        drawPlaces: function(context, parking) {
+            parking.areas.forEach(function(area) {
+                var color = (area.freeSpacesNum != area.size) ? "#5fe843" : "#94030a";
+                var points = area.area;
+                this.createPolyline(context, color, points);
+            }, this);
+        },
+
         drawImage: function(context, parking, scale) {
+            if (!this.isScaleSet) {
+                this.isScaleSet = true;
+                context.scale(scale, scale);
+            }
+            var self = this;
             var image = new Image();
             image.src = parking.lastImage + "?date=" + parking.lastUpdate;
             image.onload = function() {
-                context.scale(scale, scale);
                 context.drawImage(image, 0, 0);
+                self.drawPlaces(context, parking)
             };
-            context.scale(1, 1);
-        },
-
-        getPoints: function(place) {
-            var points = [];
-            points.push(place.rectangle.minLeft);
-            points.push(place.rectangle.minRight);
-            points.push(place.rectangle.maxRight);
-            points.push(place.rectangle.maxLeft);
-            points.push(place.rectangle.minLeft);
-            return points;
         },
 
         createPolyline: function (context, color, points) {
@@ -142,9 +136,17 @@
             context.stroke();
         },
 
+        getCursorPosition: function (event) {
+            var canvas = $("#fullSizeCanvas")[0];
+            var rect = canvas.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+            console.log("x: " + x + " y: " + y);
+        },
+
         refresh: function() {
             var self = this;
-            this.getParking(1).then(function(parking) {
+            this.getParking(2).then(function(parking) {
                 self.showView(parking);
             }, function() {
                 $("h2").text("Error");
@@ -156,6 +158,11 @@
     };
 
     demoApp.refresh();
+
+    $("#fullSizeCanvas").click(function (event) {
+        demoApp.getCursorPosition(event);
+    });
+
 </script>
 
 </body>

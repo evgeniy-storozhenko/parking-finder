@@ -34,8 +34,11 @@ public class Rectangle {
     @NotFound(action = NotFoundAction.IGNORE)
     private Point maxRight;
 
-    public Rectangle(Long id,Point minLeft, Point minRight, Point maxLeft, Point maxRight) {
+    private boolean isEmpty = true;
+
+    public Rectangle(Long id, boolean isEmpty, Point minLeft, Point minRight, Point maxLeft, Point maxRight) {
         this.id = id;
+        this.isEmpty = isEmpty;
         this.minLeft = minLeft;
         this.minRight = minRight;
         this.maxLeft = maxLeft;
@@ -83,5 +86,13 @@ public class Rectangle {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setIsEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
     }
 }
