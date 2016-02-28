@@ -50,7 +50,7 @@ public class Analyzer {
         Rectangle[] rects = opencv.detect();
 
         logger.info("Loading image: " + parking.getLastImage());
-        logger.info("Bodies: " + lines);
+        logger.info("rects: " + rects);
         // TODO analyze
     }
 
