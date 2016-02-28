@@ -111,6 +111,26 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.opencv</groupId>
+            <artifactId>opencv</artifactId>
+            <version>0.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>gab.opencv</groupId>
+            <artifactId>opencv_processing</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>processing-core</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -130,6 +150,60 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-external-opencv</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${project.basedir}/3rdParty/opencv-0.5.2.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>org.opencv</groupId>
+                            <artifactId>opencv</artifactId>
+                            <version>0.5.2</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>install-external-opencv-processing</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${project.basedir}/3rdParty/opencv_processing.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>gab.opencv</groupId>
+                            <artifactId>opencv_processing</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>install-external-processing</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${project.basedir}/3rdParty/processing-3.0.2-linux64/core/library/core.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>org.processing</groupId>
+                            <artifactId>processing-core</artifactId>
+                            <version>3.0.2</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

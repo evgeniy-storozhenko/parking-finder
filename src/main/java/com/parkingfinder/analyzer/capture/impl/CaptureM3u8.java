@@ -17,7 +17,6 @@ public class CaptureM3u8 implements CaptureService {
     private final Parking parking;
     private final Source source;
     private final DefaultResourceLoader loader;
-    private final String recordsPath = "classpath:../../resources/images/records";
 
     public CaptureM3u8(Parking parking) {
         this.parking = parking;

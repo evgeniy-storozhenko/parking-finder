@@ -45,6 +45,6 @@
         <property name="password" value="1234"/>
     </bean>
 
-    <bean id="blogService" class="com.parkingfinder.web.controller.ParkingFinder" init-method="init"/>
+    <bean id="parkingFinder" class="com.parkingfinder.web.controller.ParkingFinder" init-method="init"/>
 
 </beans>

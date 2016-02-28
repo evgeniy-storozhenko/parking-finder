@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.parkingfinder.web.model.Parking;
@@ -18,7 +17,6 @@ public class JobManager extends Thread {
 
     private static final Logger logger = Logger.getLogger("JobManager");
 
-    @Qualifier("parkingService")
     @Autowired
     private ParkingService parkingService;
 
