@@ -3,21 +3,22 @@ package com.parkingfinder.analyzer;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.core.io.DefaultResourceLoader;
+
+import processing.core.PApplet;
+
 import com.parkingfinder.analyzer.capture.CaptureService;
 import com.parkingfinder.web.model.Parking;
-import gab.opencv.Line;
 import gab.opencv.OpenCV;
-import org.springframework.core.io.DefaultResourceLoader;
-import processing.core.PApplet;
 
 public class Analyzer {
 
     private static Analyzer instance = null;
     private static final Logger logger = Logger.getLogger("Analyzer");
+    private static final String carCascade = "car.xml";
 
     private String absResourcesPath = "";
 
@@ -46,11 +47,12 @@ public class Analyzer {
 
         String imagePath = absResourcesPath + "/" + parking.getLastImage();
         OpenCV opencv = new OpenCV(pApplet, imagePath);
-        opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE); // TODO change cascadeFileName
-        Rectangle[] rects = opencv.detect();
+        opencv.loadCascade(carCascade);
+        Rectangle[] cars = opencv.detect();
 
         logger.info("Loading image: " + parking.getLastImage());
-        logger.info("rects: " + rects);
+        logger.info("Cars: " + cars);
+
         // TODO analyze
     }
 
