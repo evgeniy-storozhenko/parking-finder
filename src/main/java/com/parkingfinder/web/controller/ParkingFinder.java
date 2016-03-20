@@ -2,7 +2,6 @@ package com.parkingfinder.web.controller;
 
 import java.util.List;
 
-import com.parkingfinder.analyzer.core.OpenCVLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ public class ParkingFinder {
     private ParkingService parkingService;
 
     public void init() {
-//        OpenCVLoader.load();
         jobManager.start();
     }
 
