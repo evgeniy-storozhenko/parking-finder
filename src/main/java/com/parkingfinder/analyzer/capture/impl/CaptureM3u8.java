@@ -46,7 +46,6 @@ public class CaptureM3u8 implements CaptureService {
      * @return
      * @throws IOException
      */
-
     private File replaceOldImage(String absolutePath) throws IOException {
         File imageTmp = new File(absolutePath);
         if (!imageTmp.exists()) {

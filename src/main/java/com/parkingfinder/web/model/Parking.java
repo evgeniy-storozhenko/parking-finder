@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -30,6 +32,10 @@ public class Parking {
     @NotFound(action = NotFoundAction.IGNORE)
     private Source source;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Point size;
+
     private Date lastUpdate;
 
     private String lastImage;
@@ -41,6 +47,10 @@ public class Parking {
     @OneToOne (cascade = CascadeType.ALL)
     @NotFound(action = NotFoundAction.IGNORE)
     private City city;
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Rectangle> cars = new ArrayList<>();
 
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<ParkingArea> areas = new ArrayList<>();
@@ -107,5 +117,21 @@ public class Parking {
 
     public void setAreas(List<ParkingArea> areas) {
         this.areas = areas;
+    }
+
+    public Point getSize() {
+        return size;
+    }
+
+    public void setSize(Point size) {
+        this.size = size;
+    }
+
+    public List<Rectangle> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Rectangle> cars) {
+        this.cars = cars;
     }
 }

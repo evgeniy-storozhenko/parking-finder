@@ -1,16 +1,20 @@
 package com.parkingfinder.web.service.job;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.parkingfinder.analyzer.Analyzer;
 import com.parkingfinder.analyzer.capture.CaptureService;
 import com.parkingfinder.analyzer.capture.CaptureServiceFactory;
+import com.parkingfinder.analyzer.core.Analyzer;
 import com.parkingfinder.web.model.Parking;
+import com.parkingfinder.web.model.Point;
 import com.parkingfinder.web.model.Status;
 import com.parkingfinder.web.service.ParkingService;
+
+import javax.imageio.ImageIO;
 
 public class Job extends Thread {
 
@@ -46,6 +50,10 @@ public class Job extends Thread {
             File image = service.captureLastImage();
             if (image != null) {
                 parking.setLastImage("/resources/images/records/" + image.getName());
+                if (parking.getSize() == null) {
+                    BufferedImage bimg = ImageIO.read(image);
+                    parking.setSize(new Point(bimg.getWidth(), bimg.getHeight()));
+                }
                 Analyzer.getInstance().analyze(parking);
                 parking.setLastUpdate(new Date());
                 parkingService.save(parking);

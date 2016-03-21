@@ -91,12 +91,22 @@
         },
 
         populateSmallSize: function(parking) {
+            if (parking.size && (parking.size.x * 0.25 != smallSizeCanvas.width
+                    || parking.size.y * 0.25 != smallSizeCanvas.height)) {
+                smallSizeCanvas.width = parking.size.x * 0.25;
+                smallSizeCanvas.height = parking.size.y * 0.25;
+            }
             var context = smallSizeCanvas.getContext('2d');
             context.clearRect(0, 0, smallSizeCanvas.width, smallSizeCanvas.height);
             this.drawImage(context, parking, 0.25);
         },
 
         populateFullSize: function(parking) {
+            if (parking.size && (parking.size.x != fullSizeCanvas.width
+                    || parking.size.y != fullSizeCanvas.height)) {
+                fullSizeCanvas.width = parking.size.x;
+                fullSizeCanvas.height = parking.size.y;
+            }
             var context = fullSizeCanvas.getContext('2d');
             context.clearRect(0, 0, fullSizeCanvas.width, fullSizeCanvas.height);
             this.drawImage(context, parking, 1);
@@ -106,6 +116,18 @@
             parking.areas.forEach(function(area) {
                 var color = (area.freeSpacesNum != area.size) ? "#5fe843" : "#94030a";
                 var points = area.area;
+                this.createPolyline(context, color, points);
+            }, this);
+        },
+
+        drawCars: function(context, parking) {
+            parking.cars.forEach(function(car) {
+                var color = "#fcfc4e";
+                var points = [];
+                points.push(car.minLeft);
+                points.push(car.minRight);
+                points.push(car.maxRight);
+                points.push(car.maxLeft);
                 this.createPolyline(context, color, points);
             }, this);
         },
@@ -120,7 +142,8 @@
             image.src = parking.lastImage + "?date=" + parking.lastUpdate;
             image.onload = function() {
                 context.drawImage(image, 0, 0);
-                self.drawPlaces(context, parking)
+                self.drawPlaces(context, parking);
+                self.drawCars(context, parking);
             };
         },
 

@@ -1,15 +1,20 @@
-package com.parkingfinder.analyzer;
+package com.parkingfinder.analyzer.core;
 
 import java.awt.*;
+import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import com.parkingfinder.analyzer.util.AnalyzerUtils;
+import com.parkingfinder.web.model.*;
 import org.springframework.core.io.DefaultResourceLoader;
 
 import processing.core.PApplet;
 
-import com.parkingfinder.web.model.Parking;
 import gab.opencv.OpenCV;
 
 public class Analyzer {
@@ -49,6 +54,12 @@ public class Analyzer {
 
         logger.info("Loading image: " + parking.getLastImage());
         logger.info("Cars: " + cars);
+
+        List<com.parkingfinder.web.model.Rectangle> carsPositions = Arrays.stream(cars)
+                .map(item -> AnalyzerUtils.convert(item))
+                .collect(Collectors.toList());
+
+        parking.setCars(carsPositions);
 
         // TODO analyze
     }
